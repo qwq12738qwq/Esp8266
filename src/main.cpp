@@ -23,8 +23,8 @@ void setup() {
   // 初始化链接wifi
   WiFiMode(WIFI_STA);
   // 设置wifi链接名称,密码
-  const char* ssid = "RedmiAX1800";
-  const char* passwd = "AB1234567890";
+  const char* ssid = "vivo S9";
+  const char* passwd = "1145141919810";
   
   while (WiFi.status() != WL_CONNECTED)
   {
@@ -51,16 +51,16 @@ void loop() {
   digitalWrite(2,LOW);
   // 初始化Json数据
   cJSON *Datas = cJSON_CreateObject();
-  float T = dht.readTemperature();
-  delay(3000);
+  int T = dht.readTemperature();
+  // delay(3000);
   // float H = DHT_Read_H(); // 使用DHT11_Simple.h中的函数
   delay(3000);
-  float H = dht.readHumidity();
+  int H = dht.readHumidity();
   cJSON_AddNumberToObject(Datas,"Temperature", T);
   cJSON_AddNumberToObject(Datas, "Humidity", H);
   // cJSON_AddNumberToObject(Datas, "Humidity_New", H_New);
   delay(1000);
-  const char* Host_ip = "10.10.10.127";
+  const char* Host_ip = "192.168.227.190";
   const int Post = 8080; 
   // 创建TCP连接
   if (Send_Tcp.connect(Host_ip,Post))
@@ -78,6 +78,6 @@ void loop() {
   std::cout << "T:" << T << std::endl;
   std::cout << "H:" << H << std::endl;
   cJSON_Delete(Datas);
-  delay(2000);
+  delay(60000);
 }
 // put function definitions here:
